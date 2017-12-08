@@ -12,24 +12,29 @@ import SQLCrafters.DeleteStatementCrafter;
 import SQLCrafters.InsertStatementCrafter;
 import Util.DatabaseUtil;
 
-public class MitchellDBConnector implements IDatabaseController{
+public class CSVDatabaseController implements IDatabaseController{
 
     //Tables
-    private static String[] tableNames = {"apotheker"};
+    private String[] tableNames;
+    private String resourceFolderPath ;
 
-    private final static String RESOURCEPATH = "";
+    public CSVDatabaseController(String[] tableNames, String resourceFolderPath) {
+        this.tableNames = tableNames;
+        this.resourceFolderPath = resourceFolderPath;
+    }
 
     public void setup() throws IOException {
+        //Load in properties
         //Load in from CSVFiles
         CSVParserForDatabase parser = new CSVParserForDatabase();
         //Apotheker: ApothekerID,Naam,Straat,Huisnummer,Postcode,Gemeente
         //TODO: iterate over all CSV files in the folder instead of using the static String[]
         for (String tableName: tableNames) {
             System.out.println("Inserting table: " + tableName);
-            String csvPath = RESOURCEPATH + tableName+".csv";
+            String csvPath = resourceFolderPath + tableName+".csv";
             DataBaseBulkInsertData data = parser.parseDataFromFile(csvPath);
             try {
-                this.pocessInsertData(tableName, data);
+                this.processInsertData(tableName, data);
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -47,9 +52,8 @@ public class MitchellDBConnector implements IDatabaseController{
             connection = DatabaseUtil.openConnection();
             for (String tableName:tableNames) {
                 System.out.println("Cleaning table: " + tableName);
-                String SQL = new DeleteStatementCrafter().craftTableContentsDelete(tableName);
-                PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-                preparedStatement.execute();
+                PreparedStatement ps = new DeleteStatementCrafter(connection).craftTableContentsDelete(tableName);
+                ps.execute();
                 System.out.println("Finished Cleaning table: " +tableName);
             }
         }catch(Exception e){
@@ -59,15 +63,16 @@ public class MitchellDBConnector implements IDatabaseController{
         }
     }
 
-    private void pocessInsertData(String tableName,DataBaseBulkInsertData data) throws SQLException {
+    private void processInsertData(String tableName, DataBaseBulkInsertData data) throws SQLException {
         Connection connection = null;
-        InsertStatementCrafter isc = new InsertStatementCrafter();
+
         try {
 
             connection = DatabaseUtil.openConnection();
+            InsertStatementCrafter isc = new InsertStatementCrafter(connection);
             for (Map<String, String> entry : data.getEntries()) {
                 //Fill statement with data
-                PreparedStatement ps =  isc.craftInsertStatement(tableName,entry,connection);
+                PreparedStatement ps =  isc.craftInsertStatement(tableName,entry);
                 //Execute statement
                 ps.execute();
             }

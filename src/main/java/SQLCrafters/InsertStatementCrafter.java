@@ -9,7 +9,13 @@ import java.util.Map;
 
 public class InsertStatementCrafter {
 
-    public PreparedStatement craftInsertStatement(String tableName, Map<String,String> entry, Connection connection) throws SQLException {
+    private Connection connection;
+
+    public InsertStatementCrafter(Connection connection) {
+        this.connection = connection;
+    }
+
+    public PreparedStatement craftInsertStatement(String tableName, Map<String,String> entry) throws SQLException {
         // e.g.
         //"INSERT INTO customer (email, password, company, reseller) VALUES (?,?,?,?)"
         //Preamble
@@ -23,13 +29,14 @@ public class InsertStatementCrafter {
             valuesToInsert.add(kvp.getValue());
         }
         sql=sql.substring(0,sql.length()-1);
-        values.substring(0,values.length()-1);
+        values = values.substring(0,values.length()-1);
         sql+=values+")";
 
         //Turn into prepared statement
         PreparedStatement ps = connection.prepareStatement(sql);
         for (int j = 1; j <= valuesToInsert.size(); j++) {
-            ps.setString(j,valuesToInsert.get(--j));
+
+            ps.setString(j,valuesToInsert.get(j-1));
         }
 
         return ps;

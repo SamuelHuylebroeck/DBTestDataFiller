@@ -1,0 +1,51 @@
+ApothekerID,Naam,Straat,Huisnummer,Postcode,Gemeente
+1,Piet,Keel,96,6789,HMS Unsinkable II
+2,Piet,Aft Avenue,42,6789,HMS Unsinkable II
+3,Piet,Poopdeck Lane,42,6789,HMS Unsinkable II
+4,Corneel,Forecastle street,42,6789,Haul
+5,Joris,Keel,96,6789,Haul
+6,Jan,Keel,96,4242,HMS Unsinkable II
+7,Corneel,Aft Avenue,96,4242,Salty Barnacle
+8,Piet,Forecastle street,42,1248,HMS Unsinkable II
+9,Joris,Keel,96,6789,Salty Barnacle
+10,Joris,Keel,96,1248,HMS Unsinkable II
+11,Jan,Keel,42,6789,Haul
+12,Joris,Poopdeck Lane,42,1248,Haul
+13,Joris,Aft Avenue,96,6789,Haul
+14,Corneel,Poopdeck Lane,96,6789,HMS Unsinkable II
+15,Jan,Forecastle street,96,4242,HMS Unsinkable II
+16,Piet,Forecastle street,96,1248,Haul
+17,Jan,Aft Avenue,96,6789,HMS Unsinkable II
+18,Joris,Aft Avenue,42,1248,HMS Unsinkable II
+19,Joris,Poopdeck Lane,42,1248,Salty Barnacle
+20,Joris,Aft Avenue,96,6789,Haul
+21,Piet,Forecastle street,42,6789,HMS Unsinkable II
+22,Piet,Forecastle street,96,6789,Haul
+23,Jan,Poopdeck Lane,96,6789,HMS Unsinkable II
+24,Joris,Forecastle street,42,4242,Salty Barnacle
+25,Piet,Poopdeck Lane,96,6789,Haul
+26,Jan,Poopdeck Lane,96,6789,HMS Unsinkable II
+27,Corneel,Poopdeck Lane,96,1248,Salty Barnacle
+28,Piet,Forecastle street,42,6789,Salty Barnacle
+29,Joris,Aft Avenue,96,6789,HMS Unsinkable II
+30,Joris,Forecastle street,96,6789,HMS Unsinkable II
+31,Jan,Forecastle street,96,6789,Haul
+32,Piet,Keel,96,6789,Salty Barnacle
+33,Joris,Poopdeck Lane,42,4242,HMS Unsinkable II
+34,Joris,Poopdeck Lane,96,4242,HMS Unsinkable II
+35,Jan,Forecastle street,42,6789,HMS Unsinkable II
+36,Jan,Forecastle street,42,4242,HMS Unsinkable II
+37,Piet,Keel,96,6789,HMS Unsinkable II
+38,Joris,Poopdeck Lane,96,1248,Haul
+39,Joris,Keel,42,1248,HMS Unsinkable II
+40,Corneel,Forecastle street,96,4242,HMS Unsinkable II
+41,Jan,Aft Avenue,96,4242,HMS Unsinkable II
+42,Jan,Poopdeck Lane,42,6789,HMS Unsinkable II
+43,Piet,Aft Avenue,42,6789,HMS Unsinkable II
+44,Corneel,Aft Avenue,42,6789,HMS Unsinkable II
+45,Jan,Poopdeck Lane,96,6789,Haul
+46,Joris,Keel,42,1248,Salty Barnacle
+47,Joris,Keel,42,1248,HMS Unsinkable II
+48,Corneel,Aft Avenue,42,1248,Salty Barnacle
+49,Jan,Aft Avenue,96,6789,HMS Unsinkable II
+50,Jan,Keel,96,1248,HMS Unsinkable II
