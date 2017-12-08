@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Map;
 
 import Models.DataBaseBulkInsertData;
 import Parser.CSVParserForDatabase;
 import SQLCrafters.DeleteStatementCrafter;
+import SQLCrafters.InsertStatementCrafter;
 import Util.DatabaseUtil;
 
 public class MitchellDBConnector implements IDatabaseController{
@@ -23,9 +25,15 @@ public class MitchellDBConnector implements IDatabaseController{
         //Apotheker: ApothekerID,Naam,Straat,Huisnummer,Postcode,Gemeente
         //TODO: iterate over all CSV files in the folder instead of using the static String[]
         for (String tableName: tableNames) {
+            System.out.println("Inserting table: " + tableName);
             String csvPath = RESOURCEPATH + tableName+".csv";
             DataBaseBulkInsertData data = parser.parseDataFromFile(csvPath);
-            this.pocessInsertData(tableName,data);
+            try {
+                this.pocessInsertData(tableName, data);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            System.out.println("Finished inserting table: " + tableName);
         }
 
 
@@ -38,9 +46,11 @@ public class MitchellDBConnector implements IDatabaseController{
         try{
             connection = DatabaseUtil.openConnection();
             for (String tableName:tableNames) {
+                System.out.println("Cleaning table: " + tableName);
                 String SQL = new DeleteStatementCrafter().craftTableContentsDelete(tableName);
                 PreparedStatement preparedStatement = connection.prepareStatement(SQL);
                 preparedStatement.execute();
+                System.out.println("Finished Cleaning table: " +tableName);
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -49,8 +59,25 @@ public class MitchellDBConnector implements IDatabaseController{
         }
     }
 
-    private void pocessInsertData(String tableName,DataBaseBulkInsertData data){
+    private void pocessInsertData(String tableName,DataBaseBulkInsertData data) throws SQLException {
+        Connection connection = null;
+        InsertStatementCrafter isc = new InsertStatementCrafter();
+        try {
 
+            connection = DatabaseUtil.openConnection();
+            for (Map<String, String> entry : data.getEntries()) {
+                //Fill statement with data
+                PreparedStatement ps =  isc.craftInsertStatement(tableName,entry,connection);
+                //Execute statement
+                ps.execute();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally {
+            if(connection != null){
+                connection.close();
+            }
+        }
     }
 
 }
