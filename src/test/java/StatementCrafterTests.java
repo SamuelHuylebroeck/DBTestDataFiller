@@ -19,7 +19,7 @@ public class StatementCrafterTests {
 
         DataBaseBulkInsertData data  = new CSVParserForDatabase().parseDataFromFile(filepath);
         String expected ="INSERT INTO test (headerOne,headerThree,headerTwo) VALUES ('one','three','two')";
-        String actual = new InsertStatementCrafter(DatabaseUtil.openConnection()).craftInsertStatement("test",data.getEntries().get(0)).toString();
+        String actual = new InsertStatementCrafter(DatabaseUtil.openConnection()).craftInsertStatement("input/test",data.getEntries().get(0)).toString();
         int startPos = actual.indexOf("INSERT");
         Assert.assertEquals(expected,actual.substring(startPos));
     }

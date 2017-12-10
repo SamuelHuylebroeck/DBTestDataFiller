@@ -1,0 +1,51 @@
+ApothekerID,Naam,Straat,Huisnummer,Postcode,Gemeente
+1,Happy Cherubim,Aft Avenue,256,1684,Wanderlust
+2,Corneel,Keel,128,6432,Salty Barnacle
+3,Corneel,Forecastle street,128,6789,Karava
+4,Ajax,Godsigh of Noonsday Triumph,2,1248,Glimmerbay
+5,Joris,Shrine to Konky,128,1684,Karava
+6,Jan,Godsigh of Noonsday Triumph,2,6789,Walking Devil Tower
+7,Happy Cherubim,Shrine to Konky,16,1684,Glimmerbay
+8,Sesus Novia,Poopdeck Lane,32,1632,HMS Unsinkable II
+9,Ajax,Poopdeck Lane,8,6432,Hearthsbalm
+10,Godwin Corelli,Glories Most High,1024,1248,Wanderlust
+11,Happy Cherubim,Glories Most High,32,1632,Gloomlight
+12,Piet,Glories Most High,32,4242,Walking Devil Tower
+13,Sesus Novia,Shrine to Konky,4,6789,Glimmerbay
+14,Seven Symphonious Cords,Shrine to Konky,8,4242,Gloomlight
+15,Godwin Corelli,Aft Avenue,1024,1632,Wanderlust
+16,Godwin Corelli,Poopdeck Lane,2,1632,Walking Devil Tower
+17,Piet,Godsigh of Noonsday Triumph,512,2111,Hearthsbalm
+18,Joris,Forecastle street,128,1248,HMS Unsinkable II
+19,Corneel,Forecastle street,256,2111,Wanderlust
+20,Ajax,Forecastle street,4,1684,Ash
+21,Happy Cherubim,Shrine to Konky,64,1684,Karava
+22,Happy Cherubim,Godsigh of Noonsday Triumph,64,6432,Wanderlust
+23,Ajax,Forecastle street,2,1632,Ash
+24,Piet, Temple District,256,1632,Gloomlight
+25,Corneel,Glories Most High,2,1684,Wanderlust
+26,Seven Symphonious Cords,Shrine to Konky,128,6789,Walking Devil Tower
+27,Happy Cherubim,Shrine to Konky,128,1248,Walking Devil Tower
+28,Godwin Corelli,Glories Most High,4,2111,Wanderlust
+29,Piet,Shrine to Konky,2,6432,HMS Unsinkable II
+30,Seven Symphonious Cords,Aft Avenue,256,4242,Ash
+31,Happy Cherubim,Poopdeck Lane,1,6432,Gloomlight
+32,Ajax,Aft Avenue,512,6789,Gloomlight
+33,Godwin Corelli,Aft Avenue,32,1632,Wanderlust
+34,Jan,Poopdeck Lane,4,6789,Haul
+35,Piet,Glories Most High,512,1632,Walking Devil Tower
+36,Ajax,Aft Avenue,256,1248,Hearthsbalm
+37,Piet,Shrine to Konky,4,1248,HMS Unsinkable II
+38,Piet,Glories Most High,1024,1684,Ash
+39,Jan,Shrine to Konky,128,1684,HMS Unsinkable II
+40,Happy Cherubim,Poopdeck Lane,4,1684,Wanderlust
+41,Corneel,Glories Most High,128,1248,Ash
+42,Godwin Corelli,Aft Avenue,32,1632,Hearthsbalm
+43,Corneel,Shrine to Konky,512,2111,Glimmerbay
+44,Sesus Novia,Glories Most High,32,4242,Wanderlust
+45,Piet,Glories Most High,16,6789,Haul
+46,Godwin Corelli,Poopdeck Lane,512,6432,Glimmerbay
+47,Corneel,Forecastle street,16,6432,HMS Unsinkable II
+48,Corneel,Keel,16,1684,Hearthsbalm
+49,Happy Cherubim,Godsigh of Noonsday Triumph,4,4242,Walking Devil Tower
+50,Piet,Aft Avenue,256,6432,Karava

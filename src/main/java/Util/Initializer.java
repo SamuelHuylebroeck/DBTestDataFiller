@@ -13,7 +13,7 @@ public class Initializer{
     private final static String PROPERTIES_FILENAME = "databaseFiller.properties";
     private static Properties props = new Properties();
     private static boolean isInitialized =false;
-    private static String DEFAULTPROPERTIESPATH = "./src/main/resources/";
+    private static String DEFAULTPROPERTIESPATH = "./config/";
 
     public static Properties getProps() {
         if(!isInitialized) findConfigFile(DEFAULTPROPERTIESPATH);

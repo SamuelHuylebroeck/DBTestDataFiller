@@ -5,6 +5,7 @@ import SQLCrafters.SelectStatementCrafter;
 import Util.DatabaseUtil;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -29,6 +30,7 @@ public class DBInsertTest {
     }
 
     @Test
+    @Ignore
     public void testSimpleInsert() throws SQLException {
         Map<String,String> toInsert = new HashMap<>();
         //Fill entry
@@ -52,6 +54,7 @@ public class DBInsertTest {
     }
 
     @Test
+    @Ignore
     public void testBulkInsert(){
 
     }

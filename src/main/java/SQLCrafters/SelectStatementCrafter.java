@@ -20,8 +20,4 @@ public class SelectStatementCrafter {
         return connection.prepareStatement(sql);
 
     }
-
-    public PreparedStatement craftDumpSelect(String tableName, Map<String,String> conditions){
-        throw new NotImplementedException();
-    }
 }
