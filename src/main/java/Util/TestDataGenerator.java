@@ -7,6 +7,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataGenerator {
@@ -17,40 +18,41 @@ public class TestDataGenerator {
     public static String[] housenumbers = {"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"};
     public static String[] postcodes = {"4242", "6789", "1248", "1632", "6432", "1684", "2111"};
     public static String[] cities = {"Salty Barnacle", "HMS Unsinkable II", "Haul", "Glimmerbay", "Wanderlust", "Ash", "Gloomlight", "Karava", "Walking Devil Tower", "Hearthsbalm"};
-    public static String[] emails = {"Jan@mannenmetbaarden.com", "Piet@mannenmetbaarden.com", "Joris@mannenmetbaarden.com", "Corneel@mannenmetbaarden.com", "AllConqueringCollossus@ILoveMyWife.com"};
+    public static String[] emails = {"Jan@mannenmetbaarden.com", "Piet@mannenmetbaarden.com", "Joris@mannenmetbaarden.com", "Corneel@mannenmetbaarden.com", "AllConqueringCollossus@ILoveMyWife.com","needmoaredata@mailinator.com","itsover9000@overusedmemes.com","GlaDos@aperturescience.net","thatoneguy@iamoutofinspiration.com","snow@blizzardoutside.com","AlextrazzaIsOP@Matt.com","2Supp2Meta@HOTS.com"};
     public static String[] companyNames = {"Aperture Science", "Umbrella Corporation", "Czerka Corporation", "Weyland-Utani", "Virtucon"};
     public static String[] telephoneNumbers = {"0123456789", "987654321", "12481632", "32168421", "149162536"};
     public static String DEFAULTDESTPATH = "./target/output/data/test/";
 
 
     public static void main(String[] args) throws IOException {
-        int defaultNr = 50;
-        generateApotheker(DEFAULTDESTPATH, defaultNr);
-        generateKlant(DEFAULTDESTPATH, defaultNr);
-        generateMedicinesAndSubstances(DEFAULTDESTPATH);
-        generaterAfhalingen(DEFAULTDESTPATH, defaultNr);
-        generateGebruik(DEFAULTDESTPATH,defaultNr,defaultNr,Medicine.getDefaultMedicineList().size(),defaultNr);
-        generateBestellingen(DEFAULTDESTPATH,defaultNr,defaultNr,defaultNr,defaultNr);
-        generateBestellingenInhoud(DEFAULTDESTPATH,defaultNr,Medicine.getDefaultMedicineList().size(),defaultNr);
+        int defaultNr = 10;
+        boolean addHeader = false;
+        generateApotheker(DEFAULTDESTPATH, defaultNr,addHeader);
+        generateKlant(DEFAULTDESTPATH, defaultNr,addHeader);
+        generateMedicinesAndSubstances(DEFAULTDESTPATH,addHeader);
+        generaterAfhalingen(DEFAULTDESTPATH, defaultNr,addHeader);
+        generateGebruik(DEFAULTDESTPATH,defaultNr,defaultNr,Medicine.getDefaultMedicineList().size(),defaultNr,addHeader);
+        generateBestellingen(DEFAULTDESTPATH,defaultNr,defaultNr,defaultNr,defaultNr,addHeader);
+        generateBestellingenInhoud(DEFAULTDESTPATH,defaultNr,Medicine.getDefaultMedicineList().size(),defaultNr,addHeader);
     }
 
-    public static void generateTestData(String folder, int nrOfEntriesPerTable) throws IOException {
-        generateApotheker(folder, nrOfEntriesPerTable);
-        generateKlant(folder, nrOfEntriesPerTable);
-        generateMedicinesAndSubstances(folder);
-        generaterAfhalingen(folder, nrOfEntriesPerTable);
-        generateGebruik(folder,nrOfEntriesPerTable,nrOfEntriesPerTable,Medicine.getDefaultMedicineList().size(),nrOfEntriesPerTable);
-        generateBestellingen(folder,nrOfEntriesPerTable,nrOfEntriesPerTable,nrOfEntriesPerTable,nrOfEntriesPerTable);
-        generateBestellingenInhoud(folder,nrOfEntriesPerTable,Medicine.getDefaultMedicineList().size(),nrOfEntriesPerTable);
+    public static void generateTestData(String folder, int nrOfEntriesPerTable,boolean addHeader) throws IOException {
+        generateApotheker(folder, nrOfEntriesPerTable,addHeader);
+        generateKlant(folder, nrOfEntriesPerTable,addHeader);
+        generateMedicinesAndSubstances(folder,addHeader);
+        generaterAfhalingen(folder, nrOfEntriesPerTable,addHeader);
+        generateGebruik(folder,nrOfEntriesPerTable,nrOfEntriesPerTable,Medicine.getDefaultMedicineList().size(),nrOfEntriesPerTable,addHeader);
+        generateBestellingen(folder,nrOfEntriesPerTable,nrOfEntriesPerTable,nrOfEntriesPerTable,nrOfEntriesPerTable,addHeader);
+        generateBestellingenInhoud(folder,nrOfEntriesPerTable,Medicine.getDefaultMedicineList().size(),nrOfEntriesPerTable,addHeader);
     }
 
 
-    public static void generateApotheker(String destPath, int nrOfEntriesPerTable) throws IOException {
+    public static void generateApotheker(String destPath, int nrOfEntriesPerTable,boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
         String dest = destPath + "apotheker.csv";
         FileWriter fw = new FileWriter(dest);
         //Write header
-        fw.write("ApothekerID,Naam,Straat,Huisnummer,Postcode,Gemeente\n");
+        if(addHeader) fw.write("ApothekerID,Naam,Straat,Huisnummer,Postcode,Gemeente \n");
         //Write data
         for (int i = 1; i < nrOfEntriesPerTable + 1; i++) {
             String line = "" + i;
@@ -65,15 +67,21 @@ public class TestDataGenerator {
         fw.close();
     }
 
-    public static void generateKlant(String destPath, int nrOfEntriesPerTable) throws IOException {
+    public static void generateKlant(String destPath, int nrOfEntriesPerTable,boolean addHeader) throws IOException {
+        generateKlant(destPath,nrOfEntriesPerTable,true,addHeader);
+    }
+    public static void generateKlant(String destPath, int nrOfEntriesPerTable, boolean emailUnique,boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
+        List<String> usedEmails = new ArrayList<>();
+        boolean allEmailsHaveBeenUsed = false;
         String dest = destPath + "klant.csv";
         FileWriter fw = new FileWriter(dest);
         //Write header
-        fw.write("KlantID,Naam,Voornaam,Straat,Huisnummer,Postcode,Gemeente,Geboortedatum,Geslacht,Email,Wachtwoord\n");
+        if(addHeader) fw.write("KlantID,Naam,Voornaam,Straat,Huisnummer,Postcode,Gemeente,Geboortedatum,Geslacht,Email,Wachtwoord\n");
         //Write data
         for (int i = 1; i < nrOfEntriesPerTable + 1; i++) {
             String line = "" + i;
+
             line += "," + getRandomEntry(usernames);
             line += "," + getRandomEntry(usernames);
             line += "," + getRandomEntry(streets);
@@ -82,7 +90,24 @@ public class TestDataGenerator {
             line += "," + getRandomEntry(cities);
             line += "," + getRandomBirthdate();
             line += "," + getRandomFlag();
-            String email = getRandomEntry(emails);
+            String email ="";
+            boolean selectedEmailNotUsedYet = false;
+            if(!allEmailsHaveBeenUsed) {
+                while (!selectedEmailNotUsedYet) {
+                    //generate
+                    email = getRandomEntry(emails);
+                    if (!usedEmails.contains(email)) {
+                        selectedEmailNotUsedYet = true;
+                        usedEmails.add(email);
+                        //Check if all emails have been used
+                        if(usedEmails.size() == emails.length){
+                            allEmailsHaveBeenUsed = true;
+                        }
+                    }
+                }
+            }else{
+                email = getRandomEntry(emails);
+            }
             line += "," + email;
             line += "," + calculatePassword(email);
             line += "\n";
@@ -91,16 +116,16 @@ public class TestDataGenerator {
         fw.close();
     }
 
-    public static void generateMedicinesAndSubstances(String destPath) throws IOException {
+    public static void generateMedicinesAndSubstances(String destPath,boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
         String destMedicine = destPath + "medicijnen.csv";
         FileWriter fwMedicine = new FileWriter(destMedicine);
         //Write headers
-        fwMedicine.write("MedicijnID,Naam,Afkorting,Omschrijving,Prijs\n");
+        if(addHeader) fwMedicine.write("MedicijnID,Naam,Afkorting,Omschrijving,Prijs\n");
         String destStoffen = destPath + "stofnaam.csv";
         FileWriter fwStoffen = new FileWriter(destStoffen);
         //Write headers
-        fwStoffen.write("StofID,MedicijnID,Naam,Afkorting\n");
+        if(addHeader) fwStoffen.write("StofID,MedicijnID,Naam,Afkorting\n");
         List<Medicine> medicineList = Medicine.getDefaultMedicineList();
         int nrOfSubstancesProcessed = 1;
         for (int i = 1; i < medicineList.size() + 1; i++) {
@@ -129,12 +154,12 @@ public class TestDataGenerator {
         fwStoffen.close();
     }
 
-    public static void generaterAfhalingen(String destPath, int nrOfEntriesPerTable) throws IOException {
+    public static void generaterAfhalingen(String destPath, int nrOfEntriesPerTable, boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
         String dest = destPath + "afhaling.csv";
         FileWriter fw = new FileWriter(dest);
         //Write header
-        fw.write("AfhaalID,Bedrijfsnaam,Telefoon\n");
+        if(addHeader) fw.write("AfhaalID,Bedrijfsnaam,Telefoon\n");
         //Write data
         for (int i = 1; i < nrOfEntriesPerTable + 1; i++) {
             String line = "" + i;
@@ -146,12 +171,12 @@ public class TestDataGenerator {
         fw.close();
     }
 
-    public static void generateGebruik(String destPath, int nrOfEntriesPerTable, int nrOfClients, int nrOfMedicines, int nrOfDoses) throws IOException {
+    public static void generateGebruik(String destPath, int nrOfEntriesPerTable, int nrOfClients, int nrOfMedicines, int nrOfDoses,boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
         String dest = destPath + "gebruik.csv";
         FileWriter fw = new FileWriter(dest);
         //Write header
-        fw.write("GebruikID,KlantID,MedicijnID,AantalPerDag,AantalOchtend,AantalMiddag,AantalAvond,VoorMaaltijd,NaMaaltijd,TijdensMaaltijd\n");
+        if(addHeader) fw.write("GebruikID,KlantID,MedicijnID,AantalPerDag,AantalOchtend,AantalMiddag,AantalAvond,VoorMaaltijd,NaMaaltijd,TijdensMaaltijd\n");
         //Write data
         for (int i = 1; i < nrOfEntriesPerTable + 1; i++) {
             String line = "" + i;
@@ -170,12 +195,12 @@ public class TestDataGenerator {
         fw.close();
     }
 
-    public static void generateBestellingen(String destPath, int nrOfEntriesPerTable, int nrOfClients, int nrOfChemists, int nrOfTakeAways) throws IOException {
+    public static void generateBestellingen(String destPath, int nrOfEntriesPerTable, int nrOfClients, int nrOfChemists, int nrOfTakeAways,boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
         String dest = destPath + "bestellingen.csv";
         FileWriter fw = new FileWriter(dest);
         //Write header
-        fw.write("BestelID,KlantID,ApothekerID,AfhaalID\n");
+        if(addHeader) fw.write("BestelID,KlantID,ApothekerID,AfhaalID\n");
         //Write data
         for (int i = 1; i < nrOfEntriesPerTable + 1; i++) {
             String line = "" + i;
@@ -187,12 +212,12 @@ public class TestDataGenerator {
         }
         fw.close();
     }
-    public static void generateBestellingenInhoud(String destPath, int nrOfEntriesPerTable,int nrOfMedicines,int maxOrderAmount ) throws IOException {
+    public static void generateBestellingenInhoud(String destPath, int nrOfEntriesPerTable,int nrOfMedicines,int maxOrderAmount,boolean addHeader) throws IOException {
         new File(destPath).mkdirs();
         String dest = destPath + "bestellinginhoud.csv";
         FileWriter fw = new FileWriter(dest);
         //Write header
-        fw.write("BestelID,MedicijnID,Aantal\n");
+        if(addHeader) fw.write("BestelID,MedicijnID,Aantal\n");
         //Write data
         for (int i = 1; i < nrOfEntriesPerTable + 1; i++) {
             String line = "" + i;
